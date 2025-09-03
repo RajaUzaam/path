@@ -15,6 +15,10 @@ run/main_scene="uid://bv51magwfwfsw"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GV="*res://GV.gd"
+
 [input]
 
 left={

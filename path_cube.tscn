@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://c44aqie5assm2"]
+
+[ext_resource type="Script" uid="uid://b7eggblnmtadv" path="res://path_cube.gd" id="1_c82ro"]
+[ext_resource type="Material" uid="uid://dmtcf4d0oo8gy" path="res://path_cube.tres" id="2_bytmj"]
+[ext_resource type="Script" uid="uid://d15f0jmxlrknw" path="res://death_area.gd" id="3_b8rsb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_b8rsb"]
+material = ExtResource("2_bytmj")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yogg"]
+size = Vector3(2, 0, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8rsb"]
+size = Vector3(2, 0, 2)
+
+[node name="pathCube" type="Area3D"]
+script = ExtResource("1_c82ro")
+
+[node name="planePath" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_b8rsb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0yogg")
+
+[node name="DeathArea" type="Area3D" parent="."]
+script = ExtResource("3_b8rsb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+shape = SubResource("BoxShape3D_b8rsb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="DeathArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+shape = SubResource("BoxShape3D_b8rsb")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

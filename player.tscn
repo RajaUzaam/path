@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://bafx3lj7l7ovf"]
+
+[ext_resource type="Script" uid="uid://b0hxy045671ag" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://b8pjvp3w6jyjm" path="res://trail_cube.tscn" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://dmxj8r336o7nd" path="res://collision_detect.gd" id="3_i3pqv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3pqv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hqtel"]
+material = SubResource("StandardMaterial3D_i3pqv")
+radius = 0.025
+height = 1.0
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
+SPEED = 7.5
+trailCube = ExtResource("2_onrkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="CollisionDetect" type="Area3D" parent="."]
+script = ExtResource("3_i3pqv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionDetect"]
+shape = SubResource("BoxShape3D_i3pqv")
+
+[node name="MeshInstances" type="Node3D" parent="."]
+
+[node name="cubeMesh" type="MeshInstance3D" parent="MeshInstances"]
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("../..")
+
+[node name="Edges" type="Node3D" parent="MeshInstances"]
+
+[node name="Edge" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge2" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge3" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge4" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge5" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, -0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge6" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge7" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, 0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge8" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, -0.5)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge9" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, 0.5, 0)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge10" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, 0.5, 0)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge11" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.5, 0)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Edge12" type="MeshInstance3D" parent="MeshInstances/Edges"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.5, 0)
+mesh = SubResource("CapsuleMesh_hqtel")
+skeleton = NodePath("../..")
+
+[connection signal="area_entered" from="CollisionDetect" to="CollisionDetect" method="_on_area_entered"]
+[connection signal="body_entered" from="CollisionDetect" to="CollisionDetect" method="_on_body_entered"]
