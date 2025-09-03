@@ -1,26 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://bafx3lj7l7ovf"]
+[gd_scene load_steps=12 format=3 uid="uid://bafx3lj7l7ovf"]
 
 [ext_resource type="Script" uid="uid://b0hxy045671ag" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://b8pjvp3w6jyjm" path="res://trail_cube.tscn" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://dmxj8r336o7nd" path="res://collision_detect.gd" id="3_i3pqv"]
+[ext_resource type="Material" uid="uid://bvkapln4jbjm8" path="res://player_cube_edge.tres" id="4_hqtel"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3pqv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+transparency = 1
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 material = SubResource("StandardMaterial3D_ig7tw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
-albedo_color = Color(0, 0, 0, 1)
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hqtel"]
-material = SubResource("StandardMaterial3D_i3pqv")
+material = ExtResource("4_hqtel")
 radius = 0.025
 height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_hqtel"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="Skin" id="Skin_sweqy"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
@@ -45,7 +49,7 @@ skeleton = NodePath("../..")
 [node name="Edges" type="Node3D" parent="MeshInstances"]
 
 [node name="Edge" type="MeshInstance3D" parent="MeshInstances/Edges"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521331, -1.19209e-07, 0.49742)
 mesh = SubResource("CapsuleMesh_hqtel")
 skeleton = NodePath("../..")
 
@@ -103,6 +107,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.5, 0)
 mesh = SubResource("CapsuleMesh_hqtel")
 skeleton = NodePath("../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.741436, 0, 0)
+visible = false
+emitting = false
+draw_pass_1 = SubResource("BoxMesh_hqtel")
+draw_skin = SubResource("Skin_sweqy")
 
 [connection signal="area_entered" from="CollisionDetect" to="CollisionDetect" method="_on_area_entered"]
 [connection signal="body_entered" from="CollisionDetect" to="CollisionDetect" method="_on_body_entered"]

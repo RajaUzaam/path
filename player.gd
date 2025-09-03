@@ -59,13 +59,16 @@ func _physics_process(delta):
 func changeColor():
 	var mat := mesh.get_active_material(0)
 	var tile_color: Color = path.tile_rgb.get_color()
-	cube_color = Color(tile_color.g, tile_color.b, tile_color.r)
+	cube_color = ColorControl.new().get_complementary_color(tile_color)
 	mat.albedo_color = cube_color
+
 
 func addTrail():
 	var cube = trailCube.instantiate()
 	trail.add_child(cube)
-	cube.position = Vector3(position.x, 0.002, position.z)
+	cube.position = Vector3(position.x, position.y-0.125, position.z)
+	var trail_color = ColorControl.new().get_triadic_colors(mesh.get_active_material(0).albedo_color)[2]
+	cube.setColor(trail_color)
 	cube.scale = self.scale/2
 
 func _input(event):

@@ -1,56 +1,28 @@
 extends Node
 class_name ColorControl
 
-var start_color: Color = Color(0, 0, 0)
-var start_channel: String = "r"
-var start_direction: int = 1
-var step: float = 0.01
+func setColor(color: Color, mesh_path: MeshInstance3D) -> void:
+	var base_mat := mesh_path.get_active_material(0)
+	var mat = base_mat.duplicate()
+	mat.albedo_color = color
+	mesh_path.set_surface_override_material(0, mat)
 
-var color: Color
-var channel: String
-var direction: int
+func get_complementary_color(color: Color) -> Color:
+	var h: float = color.h
+	var s: float = color.s
+	var v: float = color.v
+	# shift hue by 180° (0.5 in normalized [0,1] hue space)
+	h = fmod(h + 0.5, 1.0)
+	# optionally adjust saturation/value for aesthetics
+	s = clamp(s * 1, 0.0, 1.0)
+	v = clamp(v * 1, 0.0, 1.0)
+	return Color.from_hsv(h, s, v, color.a)
 
-const COLOR_MAX: float = 0.8
-
-func _init(_color: Color = Color(0,0,0), _channel: String = "r", _dir: int = 1, _step: float = 0.01):
-	#start_color = _color
-	#start_channel = _channel
-	#start_direction = _dir
-
-	color = _color
-	channel = _channel
-	direction = _dir
-	step = _step
-#
-#func _process(delta: float) -> void:
-	#_cycle(step)
-
-func cycle(amount: float = step):
-	match channel:
-		"r":
-			color.r = clamp(color.r + amount * direction, 0.0, COLOR_MAX)
-			if color.r >= COLOR_MAX:
-				_switch_channel("b", -1)
-			elif color.r <= 0.0:
-				_switch_channel("b", 1) # FIX: go to b+, not g-
-
-		"g":
-			color.g = clamp(color.g + amount * direction, 0.0, COLOR_MAX)
-			if color.g >= COLOR_MAX:
-				_switch_channel("r", -1) # FIX: g+ leads to b+
-			elif color.g <= 0.0:
-				_switch_channel("r", 1) # FIX: g- leads to r-
-
-		"b":
-			color.b = clamp(color.b + amount * direction, 0.0, COLOR_MAX)
-			if color.b >= COLOR_MAX:
-				_switch_channel("g", -1)
-			elif color.b <= 0.0 and direction == -1:
-				_switch_channel("g", 1)
-
-func _switch_channel(new_channel: String, new_direction: int):
-	channel = new_channel
-	direction = new_direction
-
-func get_color() -> Color:
-	return color
+func get_triadic_colors(color: Color) -> Array:
+	var h: float = color.h
+	var s: float = clamp(color.s * 0.85, 0.0, 1.0) # soften saturation
+	var v: float = clamp(color.v * 0.95, 0.0, 1.0) # slightly dim
+	var color1 = Color.from_hsv(h, s, v, color.a)
+	var color2 = Color.from_hsv(fmod(h + 1.0/3.0, 1.0), s, v, color.a)
+	var color3 = Color.from_hsv(fmod(h + 2.0/3.0, 1.0), s, v, color.a)
+	return [color1, color2, color3]
