@@ -7,10 +7,14 @@ extends CharacterBody3D
 @export var trail: Node3D
 @onready var mesh: MeshInstance3D = $MeshInstances/cubeMesh
 @export var path: Node3D
+@onready var cube = $cube
 var mouse_captured = false
 var cube_color: Color
+@onready var animation_player = $AnimationPlayer
 
-
+func _ready():
+	animation_player.play("jump")
+	#print(scale)
 #func _ready():
 	#cube_color = ColorControl.new(Color(1, 0, 0), 'g', 1, 0.001)
 
@@ -42,6 +46,7 @@ func _physics_process(delta):
 		return
 		
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		animation_player.play("jump")
 		velocity.y = JUMP_VELOCITY
 	
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -57,7 +62,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func changeColor():
-	var mat := mesh.get_active_material(0)
+	var mat: StandardMaterial3D = cube.get_child(0).get_active_material(0)
 	var tile_color: Color = path.tile_rgb.get_color()
 	cube_color = ColorControl.new().get_complementary_color(tile_color)
 	mat.albedo_color = cube_color
@@ -66,7 +71,7 @@ func changeColor():
 func addTrail():
 	var cube = trailCube.instantiate()
 	trail.add_child(cube)
-	cube.position = Vector3(position.x, position.y-0.125, position.z)
+	cube.position = Vector3(position.x, position.y-(scale.x/2), position.z)
 	var trail_color = ColorControl.new().get_triadic_colors(mesh.get_active_material(0).albedo_color)[2]
 	cube.setColor(trail_color)
 	cube.scale = self.scale/2
@@ -78,3 +83,7 @@ func _input(event):
 	elif event.as_text() == "Tab":
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		mouse_captured = false
+
+
+func _on_animation_player_animation_started(anim_name):
+	pass

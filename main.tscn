@@ -1,29 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv51magwfwfsw"]
+[gd_scene load_steps=11 format=3 uid="uid://bv51magwfwfsw"]
 
 [ext_resource type="PackedScene" uid="uid://bafx3lj7l7ovf" path="res://player.tscn" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://ckm2pb6aj0od1" path="res://ui_scenes/game_ui.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://bg1mp8w81rib1" path="res://path.gd" id="4_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://n28bbujpspko" path="res://matbgplane.jpg" id="5_5vw27"]
-[ext_resource type="PackedScene" uid="uid://2yr32c1glpkm" path="res://border_pillar.tscn" id="5_7mycd"]
-[ext_resource type="Script" uid="uid://bn2uukhjs286n" path="res://border.gd" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://c44aqie5assm2" path="res://path_cube.tscn" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://db6qosfcvp1ff" path="res://world_environment.gd" id="6_5vw27"]
-[ext_resource type="PackedScene" uid="uid://dp7rwigqkxax2" path="res://border_railing.tscn" id="9_kek77"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-albedo_texture = ExtResource("5_5vw27")
-albedo_texture_force_srgb = true
-emission_enabled = true
-emission = Color(0, 0, 1, 1)
-emission_energy_multiplier = 0.01
-uv1_scale = Vector3(0.1, 1, 1)
-uv1_triplanar = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_7mycd"]
-material = SubResource("StandardMaterial3D_1bvp3")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
-size = Vector3(50, 0, 12)
 
 [sub_resource type="Gradient" id="Gradient_kek77"]
 
@@ -57,17 +38,20 @@ adjustment_saturation = 2.0
 [node name="Main" type="Node3D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("trail", "path") instance=ExtResource("1_1bvp3")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.5, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 trail = NodePath("../Trail")
 path = NodePath("../Path")
 
+[node name="Camera3D3" type="Camera3D" parent="Player"]
+transform = Transform3D(5.24537e-07, 4, 1.74846e-07, 0, -1.74846e-07, 4, 4, -5.24537e-07, -2.29282e-14, 0, 19.2767, 0)
+
 [node name="Camera3D2" type="Camera3D" parent="Player"]
 transform = Transform3D(-6.18173e-08, 1.41421, -1.41421, 6.18173e-08, 1.41421, 1.41421, 2, 2.4869e-14, -8.74228e-08, -2.54128, 3.70277, 2.27374e-13)
+current = true
 fov = 90.0
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(-3.78552e-08, 0.5, -0.866025, 2.18557e-08, 0.866025, 0.5, 1, 1.95399e-14, -4.37114e-08, -1.96079, 1.70277, 2.27374e-13)
-current = true
 fov = 90.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -76,46 +60,15 @@ shadow_opacity = 0.4
 
 [node name="GameUI" parent="." instance=ExtResource("3_h2yge")]
 
-[node name="Path" type="Node3D" parent="." node_paths=PackedStringArray("plane")]
+[node name="Path" type="Node3D" parent="."]
 script = ExtResource("4_1bvp3")
 cube_scene = ExtResource("5_lquwl")
 number_of_cubes = 20
-plane = NodePath("../Plane/Plane")
 
 [node name="Trail" type="Node3D" parent="."]
-
-[node name="Plane" type="StaticBody3D" parent="."]
 visible = false
-
-[node name="Plane" type="MeshInstance3D" parent="Plane"]
-transform = Transform3D(150, 0, 0, 0, 1, 0, 0, 0, 6, 0, 0, 0)
-visible = false
-mesh = SubResource("PlaneMesh_7mycd")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane"]
-shape = SubResource("BoxShape3D_1bvp3")
-disabled = true
-
-[node name="testCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 51.6702, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." node_paths=PackedStringArray("path")]
 environment = SubResource("Environment_1bvp3")
 script = ExtResource("6_5vw27")
 path = NodePath("../Path")
-
-[node name="Border" type="StaticBody3D" parent="."]
-visible = false
-script = ExtResource("5_272bh")
-pillar_scene = ExtResource("5_7mycd")
-railing_scene = ExtResource("9_kek77")
-
-[node name="Border" parent="Border" instance=ExtResource("5_7mycd")]
-transform = Transform3D(-2.62268e-07, -6, 0, 6, -2.62268e-07, 0, 0, 0, 6, 0, 0, 0)
-visible = false
-
-[node name="Railing" parent="Border" instance=ExtResource("9_kek77")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.75, 5.92757)
-visible = false
-skeleton = NodePath("..")
