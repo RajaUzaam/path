@@ -4,16 +4,19 @@ extends Node3D
 @export var number_of_cubes: int = 50
 @export var x_step_size: float = 2
 @export var z_step_size: float = 1
-@export var bump_corr_freq: int = 3
+#@export var bump_corr_freq: int = 3
 @export var start_x: float = -10
 @export var plane: MeshInstance3D
-var bump_flag: int = 0
-var corr_count = 0
+#@export var jump_obstacle_scene: PackedScene
+#var bump_flag: int = 0
+#var corr_count = 0
+#@export var player: CharacterBody3D
+var tile_rgb: ColorChanger
 var current_position
-@export var tile_rgb: ColorChanger
+var tile_num: int = 0
 
-func _ready():
-	tile_rgb = ColorChanger.new(Color(0, 1, 0), "b", 1, 0.02)
+func _ready() -> void:
+	tile_rgb = ColorChanger.new(Color(0, 1, 0), "b", 1, 0.025)
 	
 	current_position = Vector3(6, 0, 0)
 	randomize()
@@ -21,20 +24,28 @@ func _ready():
 	for i in range(number_of_cubes):
 		addCube(true)
 	current_position.x += start_x-6
-		
-	
-func addCube(gen: bool):
+
+
+func addCube(gen: bool) -> void:
 	var cube = cube_scene.instantiate()
 	add_child(cube)
 	tile_rgb.cycle()
 	cube.position = current_position
-	cube.setColor(tile_rgb.get_color())
+	#cube.setColor(tile_rgb.get_color())
 	if gen:
+		cube.setCube(tile_rgb.get_color(), tile_num, false)
 		current_position.x += x_step_size
 	else:
+		tile_num += 1
 		current_position = newRandPos(current_position)
+		cube.setCube(tile_rgb.get_color(), tile_num, true)
+		#if tile_num%4 == 0:
+			#cube.addObstacle()
+			#var jump_obstacle = jump_obstacle_scene.instantiate()
+			#cube.add_child(jump_obstacle)
+			#jump_obstacle.scale = 0.75
 
-func newRandPos(currPos):
+func newRandPos(currPos) -> Vector3:
 	var randPos = currPos
 	var randz = randi_range(1, 2)
 	#if bump_flag != 0:

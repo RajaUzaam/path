@@ -4,14 +4,30 @@ extends StaticBody3D
 @onready var animation_player = $AnimationPlayer
 
 var curr_anim = 'height_anim'
+@onready var path_obj = $pathObj
+@onready var score = $pathObj/Score
+const OBSTACLE_GEN = preload("res://obstacle_gen.tscn")
 
 func _ready():
 	visible = false
 
-func setColor(color: Color):
+func setCube(color: Color, cube_idx: int, gen_obstacle: bool = false) -> void:
+	#print(gen_obstacle)
+	setColor(color)
+	addObstacle(color, cube_idx, gen_obstacle)
+
+func setColor(color: Color) -> void:
 	ColorControl.new().setColor(color, plane_path)
 
-func _process(delta):
+func addObstacle(color: Color, idx: int, gen: bool) -> void:
+	if (idx%4 != 0) or (!gen): return
+	var obstacle_scene = OBSTACLE_GEN.instantiate()
+	path_obj.add_child(obstacle_scene)
+	score.queue_free()
+	obstacle_scene.scale = Vector3(0.875, 0.875, 0.875)
+	obstacle_scene.setColor(color)
+
+func _process(_delta):
 	position.x -= GV.game_speed
 	if position.x <= 8 and !animation_player.is_playing():
 		animation_player.play(curr_anim)
@@ -20,7 +36,7 @@ func _process(delta):
 		queue_free()
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	curr_anim = 'default'
 
 
