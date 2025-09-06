@@ -6,3 +6,5 @@ func onCollision() -> void:
 	
 func onDeath() -> void:
 	print('You Died!')
+	DataHandler.new().StatsSave()
+	

@@ -87,4 +87,5 @@ func _input(event) -> void:
 
 func checkBoundary() -> void:
 	if position.y <= -2.5:
-		print("You Died!")
+		ObstacleControl.new().onCollision()
+		get_tree().paused = true # LATER TO BE CHANGED
