@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://bv51magwfwfsw"]
+
+[ext_resource type="PackedScene" uid="uid://bafx3lj7l7ovf" path="res://scenes/player.tscn" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://5c3epm5t28db" path="res://scenes/cameras.tscn" id="1_7mycd"]
+[ext_resource type="Script" uid="uid://bg1mp8w81rib1" path="res://scripts/path.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c44aqie5assm2" path="res://scenes/path_cube.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://db6qosfcvp1ff" path="res://scripts/world_environment.gd" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cdi48318ce466" path="res://ui/scenes/ui.tscn" id="6_7mycd"]
+
+[sub_resource type="Gradient" id="Gradient_kek77"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4c57u"]
+gradient = SubResource("Gradient_kek77")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_efxa6"]
+panorama = SubResource("GradientTexture2D_4c57u")
+
+[sub_resource type="Sky" id="Sky_lquwl"]
+sky_material = SubResource("PanoramaSkyMaterial_efxa6")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_lquwl")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+glow_intensity = 0.4
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_curve = 0.189464
+fog_depth_end = 50.0
+adjustment_enabled = true
+adjustment_saturation = 2.0
+
+[node name="Main" type="Node3D"]
+
+[node name="Cameras" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_7mycd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+player = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("trail", "path") instance=ExtResource("1_1bvp3")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 20, 0)
+JUMP_VELOCITY = 3.75
+trail = NodePath("../Trail")
+path = NodePath("../Path")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -6, 4, 0)
+shadow_opacity = 0.4
+
+[node name="Path" type="Node3D" parent="."]
+script = ExtResource("4_1bvp3")
+cube_scene = ExtResource("5_lquwl")
+number_of_cubes = 20
+
+[node name="Trail" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." node_paths=PackedStringArray("path")]
+environment = SubResource("Environment_1bvp3")
+script = ExtResource("6_5vw27")
+path = NodePath("../Path")
+
+[node name="UI" parent="." instance=ExtResource("6_7mycd")]

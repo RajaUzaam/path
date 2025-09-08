@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c742shatgit06"]
+
+[ext_resource type="Script" uid="uid://ccsrpvp8kns80" path="res://scripts/obstacle_gen.gd" id="1_oanju"]
+
+[node name="ObstacleGen" type="Node3D"]
+script = ExtResource("1_oanju")

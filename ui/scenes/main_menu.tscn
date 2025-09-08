@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://bofw2daf2n28"]
+
+[ext_resource type="Script" uid="uid://cy11mepjt538m" path="res://ui/scripts/main_menu.gd" id="1_8kid2"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8kid2")
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -118.0
+offset_right = 78.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Path"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="Score" type="Label" parent="MainMenu/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Score: "
+
+[node name="Highscore" type="Label" parent="MainMenu/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Highscore: "
+
+[node name="StartBtn" type="Button" parent="MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Game"
+
+[node name="InstructionsBtn" type="Button" parent="MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Instructions"
+
+[node name="SettingsBtn" type="Button" parent="MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
