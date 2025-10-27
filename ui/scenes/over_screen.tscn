@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhh6bc8n1jlfx"]
+[gd_scene load_steps=9 format=3 uid="uid://bhh6bc8n1jlfx"]
 
 [ext_resource type="Script" uid="uid://d30qxxm33fpjj" path="res://ui/scripts/over_screen.gd" id="1_8ulh4"]
+[ext_resource type="FontFile" uid="uid://52y1t042acwj" path="res://assests/fonts/Coiny-Regular.ttf" id="2_xnifj"]
+[ext_resource type="FontFile" uid="uid://b7elwl4w7vjrd" path="res://assests/fonts/LilitaOne-Regular.ttf" id="3_203d1"]
+[ext_resource type="Texture2D" uid="uid://ccvfwhclh6bmr" path="res://assests/svgs/arrow-undo.svg" id="3_ifbq1"]
+[ext_resource type="Texture2D" uid="uid://c4kc8bvmkgblt" path="res://assests/svgs/star-angle-svgrepo-com.svg" id="4_2qce8"]
+[ext_resource type="Texture2D" uid="uid://illvt40qbr40" path="res://assests/svgs/stopwatch-svgrepo-com.svg" id="6_xxwam"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2qce8"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxwam"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="OverScreen" type="Control"]
 layout_mode = 3
@@ -11,40 +26,120 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8ulh4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -142.5
-offset_top = -34.5
-offset_right = 142.5
-offset_bottom = 34.5
+offset_left = -259.0
+offset_top = -284.0
+offset_right = 259.0
+offset_bottom = 284.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2qce8")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Game Over!"
+[node name="TitlePanel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 202.0
+offset_right = 20.0
+offset_bottom = 242.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xxwam")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
+[node name="Title" type="Label" parent="Panel/TitlePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.5
+offset_top = -34.0
+offset_right = 253.5
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_xnifj")
+theme_override_font_sizes/font_size = 80
+text = "GAME OVER"
 
-[node name="Score" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="MenuButtons" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 127.0
+offset_top = -278.0
+offset_right = 211.0
+offset_bottom = -202.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MainMenuBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Score: "
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_ifbq1")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="Time" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Score" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 264.0
+offset_right = 386.0
+offset_bottom = 324.0
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Score"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("4_2qce8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Score" type="Label" parent="Panel/Score"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Time: "
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("3_203d1")
+theme_override_font_sizes/font_size = 35
+text = "Highscore"
 
-[node name="MainMenuBtn" type="Button" parent="VBoxContainer"]
+[node name="StopWatch" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 324.0
+offset_right = 386.0
+offset_bottom = 384.0
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/StopWatch"]
+modulate = Color(0, 1, 1, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("6_xxwam")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Time" type="Label" parent="Panel/StopWatch"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Main Menu"
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("3_203d1")
+theme_override_font_sizes/font_size = 35
+text = "Time"

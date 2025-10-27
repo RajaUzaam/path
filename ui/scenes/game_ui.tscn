@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckm2pb6aj0od1"]
+[gd_scene load_steps=5 format=3 uid="uid://ckm2pb6aj0od1"]
 
 [ext_resource type="Script" uid="uid://3irgnyrqs8re" path="res://ui/scripts/game_ui.gd" id="1_x82gp"]
+[ext_resource type="FontFile" uid="uid://b7elwl4w7vjrd" path="res://assests/fonts/LilitaOne-Regular.ttf" id="2_85ufs"]
+[ext_resource type="Texture2D" uid="uid://bse6ww8o2jsdw" path="res://assests/svgs/pause-svgrepo-com.svg" id="3_rcht4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k35js"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -11,34 +20,56 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x82gp")
 
-[node name="PauseBtn" type="Button" parent="."]
-unique_name_in_owner = true
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -8.0
-offset_bottom = 8.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 30
-text = "Pause"
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -284.0
+offset_right = 259.0
+offset_bottom = 284.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k35js")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Score" type="Label" parent="VBoxContainer"]
+[node name="Score" type="Label" parent="Panel"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "000"
+offset_left = 179.0
+offset_top = 48.0
+offset_right = 326.0
+offset_bottom = 89.0
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("2_85ufs")
+theme_override_font_sizes/font_size = 35
+text = "Score"
+horizontal_alignment = 1
 
-[node name="Stopwatch" type="Label" parent="VBoxContainer"]
+[node name="MenuButtons" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 157.0
+offset_top = -520.0
+offset_right = 205.0
+offset_bottom = -472.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PauseBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "000"
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_rcht4")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

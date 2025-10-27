@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://doa0o1rvd28p7"]
+
+[ext_resource type="Texture2D" uid="uid://cce1kinm4jxq0" path="res://scenes/obstacles/Textures/Colorsheet Wood Red.png" id="1_tck6i"]
+[ext_resource type="ArrayMesh" uid="uid://w62pfip2ttpm" path="res://scenes/obstacles/Meshs/Fence Type2 02.obj" id="2_am3vw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tck6i"]
+albedo_texture = ExtResource("1_tck6i")
+
+[node name="FenceType101" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_tck6i")
+mesh = ExtResource("2_am3vw")

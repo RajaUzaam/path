@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwsn08vggt4ww"]
+
+[ext_resource type="Script" uid="uid://bboerfdmw6w5m" path="res://assests/world/Clouds/cloud.gd" id="1_yygdh"]
+[ext_resource type="PackedScene" uid="uid://d2ng0k7tagyky" path="res://assests/world/Clouds/Cumuls Clouds 3.glb" id="2_6uf7o"]
+
+[node name="Cloud" type="Node3D"]
+script = ExtResource("1_yygdh")
+
+[node name="Cumuls Clouds 3" parent="." instance=ExtResource("2_6uf7o")]

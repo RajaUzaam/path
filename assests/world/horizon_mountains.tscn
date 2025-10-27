@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfxcpktcf3vhd"]
+
+[ext_resource type="PackedScene" uid="uid://ixxtxxww05wx" path="res://assests/world/Mountain.glb" id="1_yuu7x"]
+[ext_resource type="PackedScene" uid="uid://db6xwb4v7vqk7" path="res://assests/world/Medium Island.glb" id="2_t316g"]
+[ext_resource type="PackedScene" uid="uid://ctwshf4nkyv8u" path="res://assests/world/Clouds/Cloud (1).glb" id="3_t316g"]
+
+[node name="HorizonMountains" type="Node3D"]
+
+[node name="Mountain" parent="." instance=ExtResource("1_yuu7x")]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, 0, 1.487435, 0)
+
+[node name="Medium Island" parent="." instance=ExtResource("2_t316g")]
+
+[node name="Root Scene" parent="." instance=ExtResource("3_t316g")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.37488556, 0)

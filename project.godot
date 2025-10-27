@@ -12,13 +12,14 @@ config_version=5
 
 config/name="PATH"
 run/main_scene="uid://bv51magwfwfsw"
-config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://assests/icon.svg"
+config/features=PackedStringArray("4.5", "Mobile")
+config/icon="res://assests/svgs/icon.svg"
 
 [autoload]
 
 GV="*res://scripts/GV.gd"
 PD="*res://scripts/PD.gd"
+BG="*res://assests/Music/BG.tscn"
 
 [input]
 
@@ -51,4 +52,5 @@ pause={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

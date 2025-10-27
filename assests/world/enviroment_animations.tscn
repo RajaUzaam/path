@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5045dw6dh6gs"]
+
+[ext_resource type="PackedScene" uid="uid://bkrho2vvv1xpm" path="res://assests/world/Ship (1).glb" id="1_0068a"]
+[ext_resource type="Script" uid="uid://bqgucf3hnypoi" path="res://assests/world/enviroment_animations.gd" id="1_c4okv"]
+
+[node name="EnviromentAnimations" type="Node3D"]
+script = ExtResource("1_c4okv")
+
+[node name="Ship" parent="." instance=ExtResource("1_0068a")]
+transform = Transform3D(-1.7484555e-07, 0, -4, 0, 4, 0, 4, 0, -1.7484555e-07, 0, 0, 0)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

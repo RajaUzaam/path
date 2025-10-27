@@ -33,6 +33,7 @@ func PerformRestart() -> void:
 	PD.stopwatch_time = 0
 	GV.game_started = false
 	GV.game_ended = false
+	DataHandler.new().Load()
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 

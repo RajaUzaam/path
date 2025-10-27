@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bofw2daf2n28"]
+[gd_scene load_steps=11 format=3 uid="uid://bofw2daf2n28"]
 
 [ext_resource type="Script" uid="uid://cy11mepjt538m" path="res://ui/scripts/main_menu.gd" id="1_8kid2"]
+[ext_resource type="FontFile" uid="uid://52y1t042acwj" path="res://assests/fonts/Coiny-Regular.ttf" id="2_pvlg3"]
+[ext_resource type="FontFile" uid="uid://b7elwl4w7vjrd" path="res://assests/fonts/LilitaOne-Regular.ttf" id="3_h3oyo"]
+[ext_resource type="Texture2D" uid="uid://cybu2mbwe26x2" path="res://assests/svgs/trophy-prize-achievement-svgrepo-com (1).svg" id="3_tc7ta"]
+[ext_resource type="Texture2D" uid="uid://c4kc8bvmkgblt" path="res://assests/svgs/star-angle-svgrepo-com.svg" id="5_p3fdt"]
+[ext_resource type="Texture2D" uid="uid://bm0w1mx724i3j" path="res://assests/svgs/bag-4-svgrepo-com.svg" id="7_bruso"]
+[ext_resource type="Texture2D" uid="uid://bcyofk1wmrmfe" path="res://assests/svgs/settings-svgrepo-com.svg" id="7_xh8ku"]
+[ext_resource type="Texture2D" uid="uid://bvfkhmw662rql" path="res://assests/svgs/inventory-svgrepo-com.svg" id="8_xh8ku"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvlg3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tc7ta"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,50 +24,162 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8kid2")
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -78.0
-offset_top = -118.0
-offset_right = 78.0
-offset_bottom = 118.0
+offset_left = -259.0
+offset_top = -284.0
+offset_right = 259.0
+offset_bottom = 284.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pvlg3")
 
-[node name="Label" type="Label" parent="MainMenu"]
+[node name="TitlePanel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 131.0
+offset_right = 20.0
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tc7ta")
+
+[node name="Title" type="Label" parent="Panel/TitlePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -58.0
+offset_right = 193.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_pvlg3")
+theme_override_font_sizes/font_size = 135
+text = "PATH"
+
+[node name="StartText" type="Label" parent="Panel/TitlePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 51.0
+offset_right = 76.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("3_h3oyo")
+theme_override_font_sizes/font_size = 25
+text = "TAP TO START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Highscore" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+offset_top = 32.0
+offset_right = 386.0
+offset_bottom = 92.0
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Highscore"]
+modulate = Color(0, 1, 1, 1)
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Path"
+texture = ExtResource("3_tc7ta")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
-layout_mode = 2
-alignment = 1
-
-[node name="Score" type="Label" parent="MainMenu/HBoxContainer"]
+[node name="Score" type="Label" parent="Panel/Highscore"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Score: "
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("3_h3oyo")
+theme_override_font_sizes/font_size = 35
+text = "Highscore"
 
-[node name="Highscore" type="Label" parent="MainMenu/HBoxContainer"]
+[node name="Stars" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -386.0
+offset_top = 32.0
+offset_bottom = 92.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Stars" type="Label" parent="Panel/Stars"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Highscore: "
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("3_h3oyo")
+theme_override_font_sizes/font_size = 35
+text = "120"
 
-[node name="StartBtn" type="Button" parent="MainMenu"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Stars"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+texture = ExtResource("5_p3fdt")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MenuButtons" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -99.0
+offset_right = 93.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SettingsBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Start Game"
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_xh8ku")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="InstructionsBtn" type="Button" parent="MainMenu"]
+[node name="ShopBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Instructions"
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_bruso")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="SettingsBtn" type="Button" parent="MainMenu"]
+[node name="InventoryBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Settings"
+size_flags_horizontal = 3
+texture_normal = ExtResource("8_xh8ku")
+ignore_texture_size = true
+stretch_mode = 5

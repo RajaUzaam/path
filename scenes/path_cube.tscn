@@ -1,10 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://c44aqie5assm2"]
+[gd_scene load_steps=13 format=3 uid="uid://c44aqie5assm2"]
 
 [ext_resource type="Script" uid="uid://b7eggblnmtadv" path="res://scripts/path_cube.gd" id="1_c82ro"]
-[ext_resource type="Material" uid="uid://dmtcf4d0oo8gy" path="res://assests/path_cube.tres" id="2_bytmj"]
+[ext_resource type="PackedScene" uid="uid://bb1xnqpfnrfap" path="res://assests/world/Flooring/Planks.glb" id="2_h6wl6"]
+[ext_resource type="PackedScene" uid="uid://b8nkhk3eo11c7" path="res://assests/world/Clouds/Clouds.glb" id="2_ojv03"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0yogg"]
-size = Vector3(2, 0.1, 2)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t7elb"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, 1, -1, 0, 1, 1, 0, 1, 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1, 1, 0, -1, -1, 0, -1, -1, 0, -1, 1, 0, -1, 1, 0, 1, 1, 0, -1, 1, 0, 1, 1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0, 1, -1, 0, -1, -1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6wl6"]
+size = Vector3(2, 0.5, 2)
 
 [sub_resource type="Animation" id="Animation_0yogg"]
 length = 0.001
@@ -170,15 +174,24 @@ _data = {
 &"resize_anim": SubResource("Animation_b8rsb")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7elb"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.90588236)
+
 [sub_resource type="BoxMesh" id="BoxMesh_b8rsb"]
-material = ExtResource("2_bytmj")
-size = Vector3(2, 0.1, 2)
+material = SubResource("StandardMaterial3D_t7elb")
+size = Vector3(2, 0, 2)
 
 [node name="pathCube" type="StaticBody3D"]
 script = ExtResource("1_c82ro")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_0yogg")
+shape = SubResource("ConcavePolygonShape3D_t7elb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("BoxShape3D_h6wl6")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -187,8 +200,18 @@ libraries = {
 
 [node name="pathObj" type="Node3D" parent="."]
 
+[node name="Root Scene" parent="pathObj" instance=ExtResource("2_h6wl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.187, 0)
+
 [node name="planePath" type="MeshInstance3D" parent="pathObj"]
+visible = false
 mesh = SubResource("BoxMesh_b8rsb")
 skeleton = NodePath("../..")
+
+[node name="Clouds" parent="pathObj" instance=ExtResource("2_ojv03")]
+transform = Transform3D(2.1855694e-10, -3.821371e-17, -0.01, -4.371139e-10, -0.01, 0, -0.005, 8.742278e-10, -4.3711387e-10, 2.0474367, -1.0099876, -0.81462586)
+
+[node name="Clouds2" parent="pathObj" instance=ExtResource("2_ojv03")]
+transform = Transform3D(-6.556708e-10, 1.1464112e-16, 0.01, -4.371139e-10, -0.01, -4.2351646e-24, 0.005, -8.742278e-10, 1.3113416e-09, -1.9757476, -0.98532087, 0.80811596)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

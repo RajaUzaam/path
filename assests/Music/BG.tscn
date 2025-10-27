@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddnsfvwxjqkit"]
+
+[ext_resource type="AudioStream" uid="uid://bgldt6ac33q8q" path="res://assests/Music/lofi-chill-background-music-330144.mp3" id="1_qsiv4"]
+
+[node name="Bg" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_qsiv4")

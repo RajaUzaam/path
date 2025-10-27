@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://su4kfhevkdqh"]
+[gd_scene load_steps=8 format=3 uid="uid://su4kfhevkdqh"]
 
 [ext_resource type="Script" uid="uid://b8p4etrrbw5f8" path="res://ui/scripts/pause_menu.gd" id="1_pa1wy"]
+[ext_resource type="FontFile" uid="uid://52y1t042acwj" path="res://assests/fonts/Coiny-Regular.ttf" id="2_ho58i"]
+[ext_resource type="FontFile" uid="uid://b7elwl4w7vjrd" path="res://assests/fonts/LilitaOne-Regular.ttf" id="4_hf30j"]
+[ext_resource type="Texture2D" uid="uid://ccvfwhclh6bmr" path="res://assests/svgs/arrow-undo.svg" id="6_q23cm"]
+[ext_resource type="Texture2D" uid="uid://1d4r5sy225m0" path="res://assests/svgs/play-bold.svg" id="7_oui70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_065a5"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4ou3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -11,32 +25,93 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pa1wy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -259.0
+offset_top = -284.0
+offset_right = 259.0
+offset_bottom = 284.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_065a5")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "Pause Menu"
+[node name="TitlePanel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 199.0
+offset_right = 20.0
+offset_bottom = 239.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4ou3")
 
-[node name="ResumeBtn" type="Button" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/TitlePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -58.0
+offset_right = 193.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_ho58i")
+theme_override_font_sizes/font_size = 115
+text = "PAUSED"
+
+[node name="Score" type="Label" parent="Panel"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Resume"
+offset_left = 179.0
+offset_top = 109.0
+offset_right = 326.0
+offset_bottom = 150.0
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 7
+theme_override_fonts/font = ExtResource("4_hf30j")
+theme_override_font_sizes/font_size = 35
+text = "Highscore"
+horizontal_alignment = 1
 
-[node name="MainMenuBtn" type="Button" parent="VBoxContainer"]
+[node name="MenuButtons" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -305.0
+offset_right = 93.0
+offset_bottom = -229.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MainMenuBtn" type="TextureButton" parent="Panel/MenuButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Main Menu
-"
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_q23cm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ResumeBtn" type="TextureButton" parent="Panel/MenuButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("7_oui70")
+ignore_texture_size = true
+stretch_mode = 5

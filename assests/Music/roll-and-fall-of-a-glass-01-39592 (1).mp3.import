@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdyuoprl0j32o"
+path="res://.godot/imported/roll-and-fall-of-a-glass-01-39592 (1).mp3-39fc6c512ef2edaa9e8b9ee2ffc86762.mp3str"
+
+[deps]
+
+source_file="res://assests/Music/roll-and-fall-of-a-glass-01-39592 (1).mp3"
+dest_files=["res://.godot/imported/roll-and-fall-of-a-glass-01-39592 (1).mp3-39fc6c512ef2edaa9e8b9ee2ffc86762.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

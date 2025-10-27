@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://c742shatgit06"]
+
+[ext_resource type="Script" uid="uid://ccsrpvp8kns80" path="res://scripts/obstacle_gen.gd" id="1_oanju"]
+[ext_resource type="Texture2D" uid="uid://cce1kinm4jxq0" path="res://scenes/obstacles/Colorsheet Wood Red.png" id="2_c3hhe"]
+[ext_resource type="ArrayMesh" uid="uid://xog0nay44yds" path="res://scenes/obstacles/Fence Type1 01.obj" id="3_c3hhe"]
+[ext_resource type="ArrayMesh" uid="uid://jmverh5altxi" path="res://scenes/obstacles/Fence Type2 01.obj" id="5_c3hhe"]
+[ext_resource type="ArrayMesh" uid="uid://05dd6aft5v8k" path="res://scenes/obstacles/Fence Type1 02.obj" id="5_uk11t"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uaadl"]
+albedo_texture = ExtResource("2_c3hhe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8i82"]
+albedo_texture = ExtResource("2_c3hhe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uk11t"]
+albedo_texture = ExtResource("2_c3hhe")
+
+[node name="ObstacleGen" type="Node3D"]
+script = ExtResource("1_oanju")
+
+[node name="FenceType101" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.278354e-08, 0.75, 3.278354e-08, 0, -3.278354e-08, 0.75, 0.75, 3.278354e-08, 1.4330142e-15, 0, 0, -0.75)
+visible = false
+material_override = SubResource("StandardMaterial3D_uaadl")
+mesh = ExtResource("3_c3hhe")
+
+[node name="FenceType102" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.278354e-08, 0.75, 3.278354e-08, 0, -3.278354e-08, 0.75, 0.75, 3.278354e-08, 1.433014e-15, 0, 0, -0.75)
+visible = false
+material_override = SubResource("StandardMaterial3D_o8i82")
+mesh = ExtResource("5_uk11t")
+
+[node name="FenceType201" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.059797e-08, 0.7, 3.059797e-08, 0, -3.059797e-08, 0.7, 0.7, 3.059797e-08, 1.3374797e-15, 0, 0, -0.85)
+visible = false
+material_override = SubResource("StandardMaterial3D_uk11t")
+mesh = ExtResource("5_c3hhe")
+
+[node name="Obstacle" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.278354e-08, 0.75, 3.278354e-08, 0, -3.278354e-08, 0.75, 0.75, 3.278354e-08, 1.4330142e-15, 0, 0, -0.75)

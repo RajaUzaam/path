@@ -1,5 +1,9 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dmtcf4d0oo8gy"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmtcf4d0oo8gy"]
+
+[ext_resource type="Texture2D" uid="uid://bp80vvih0op4g" path="res://assests/47056.jpg" id="1_b8oqa"]
 
 [resource]
 albedo_color = Color(0, 1, 0, 1)
+albedo_texture = ExtResource("1_b8oqa")
 backlight = Color(1, 1, 1, 1)
+uv1_scale = Vector3(2, 2, 0.25)

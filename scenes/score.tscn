@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi4vuahiw8bpx"]
+[gd_scene load_steps=16 format=3 uid="uid://bi4vuahiw8bpx"]
 
 [ext_resource type="Script" uid="uid://d2ww7wl1h5wv1" path="res://scripts/score.gd" id="1_ceanc"]
-[ext_resource type="PackedScene" uid="uid://33wd5u27cvwl" path="res://assests/stevens_gem.glb" id="2_vfhx4"]
+[ext_resource type="PackedScene" uid="uid://pavdto8iaaht" path="res://assests/Star.glb" id="2_plgac"]
+[ext_resource type="AudioStream" uid="uid://b8ioppnopq33c" path="res://assests/Music/retro-coin-1-236677.mp3" id="3_plgac"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3u2p1"]
 radius = 0.6
@@ -86,92 +87,135 @@ _data = {
 &"default": SubResource("Animation_i4m08")
 }
 
-[sub_resource type="Animation" id="Animation_u8ybf"]
+[sub_resource type="Animation" id="Animation_plgac"]
+resource_name = "collect"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.375, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_lew60"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Star:position:x")
+tracks/0/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Star:position:y")
+tracks/1/path = NodePath("GPUParticles3D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.25, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "bezier"
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Star:position:z")
+tracks/2/path = NodePath("OmniLight3D:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.375]
 }
 
-[sub_resource type="Animation" id="Animation_a6oh8"]
-resource_name = "default"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Star:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Star:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.125, -0.25, 0, 0.25, 0, -0.125, -0.25, 0, 0.25, 0, 0.125, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Star:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dxb71"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_68bkv"]
 _data = {
-&"RESET": SubResource("Animation_u8ybf"),
-&"default": SubResource("Animation_a6oh8")
+&"RESET": SubResource("Animation_lew60"),
+&"collect": SubResource("Animation_plgac")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plgac"]
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.654232, 0.6542321, 0.65423197, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_plgac"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xcjqx"]
+curve = SubResource("Curve_plgac")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_plgac"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+gravity = Vector3(0, 1, 0)
+linear_accel_min = 6.9999976
+linear_accel_max = 9.999997
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 2.4999976
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 2.4999976
+scale_min = 0.049999997
+scale_max = 0.13
+scale_curve = SubResource("CurveTexture_xcjqx")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3eqfp"]
 
 [node name="Score" type="Area3D"]
 transform = Transform3D(1, 0, 4.46638e-06, 0, 1, 0, -4.46638e-06, 0, 1, 0, 0, 0)
 script = ExtResource("1_ceanc")
 
-[node name="Star" parent="." instance=ExtResource("2_vfhx4")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.25, 0)
+[node name="Star" parent="." instance=ExtResource("2_plgac")]
+unique_name_in_owner = true
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
@@ -183,10 +227,30 @@ libraries = {
 }
 autoplay = "default"
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+[node name="DeathAnim" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_dxb71")
+&"": SubResource("AnimationLibrary_68bkv")
 }
-autoplay = "default"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_plgac")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.375
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_plgac")
+emitting = false
+amount = 64
+lifetime = 1.5
+explosiveness = 1.0
+randomness = 1.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_plgac")
+draw_pass_1 = SubResource("QuadMesh_3eqfp")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="DeathAnim" to="." method="_on_death_anim_animation_finished"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]
+[connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]

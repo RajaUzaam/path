@@ -12,7 +12,7 @@ func _ready():
 	visible = false
 
 func setCube(color: Color, cube_idx: int, gen_obstacle: bool = false) -> void:
-	setColor(color)
+	#setColor(color)
 	addObstacle(color, cube_idx, gen_obstacle)
 
 func setColor(color: Color) -> void:
@@ -29,7 +29,7 @@ func addObstacle(color: Color, idx: int, gen: bool) -> void:
 	var obstacle_scene = OBSTACLE_GEN.instantiate()
 	path_obj.add_child(obstacle_scene)
 	obstacle_scene.scale = Vector3(0.875, 0.875, 0.875)
-	obstacle_scene.setColor(color)
+	#obstacle_scene.setColor(color)
 	return
 
 func _process(_delta):
